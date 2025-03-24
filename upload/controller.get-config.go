@@ -5,9 +5,9 @@ import (
 )
 
 func (store *Store) getConfig(c *fiber.Ctx) error {
-    configs := make(map[string]any, len(*store.configs))
+    configs := make(map[string]any, len(*store.uploadables))
 
-    for i, cfg := range *store.configs {
+    for i, cfg := range *store.uploadables {
         configs[i] = cfg.ToJson()
     }
 

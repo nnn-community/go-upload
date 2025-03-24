@@ -12,26 +12,26 @@ import (
     "strings"
 )
 
-type UploadS3Config struct {
-    Directory string
-    FileName  string
-    FileSize  int64
-    UserId    string
+type uploadS3Config struct {
+    directory string
+    fileName  string
+    fileSize  int64
+    userId    string
 }
 
-func (store *Store) UploadS3(fileData io.Reader, config UploadS3Config) (string, error) {
-    if config.UserId != "" {
-        config.FileName = config.UserId + "-" + config.FileName
+func (store *Store) uploadToS3(fileData io.Reader, config uploadS3Config) (string, error) {
+    if config.userId != "" {
+        config.fileName = config.userId + "-" + config.fileName
     }
 
-    if config.Directory != "" {
-        config.FileName = config.Directory + "/" + config.FileName
+    if config.directory != "" {
+        config.fileName = config.directory + "/" + config.fileName
     }
 
     uploader := manager.NewUploader(store.s3)
     result, err := uploader.Upload(context.Background(), &s3.PutObjectInput{
         Bucket: aws.String(store.config.S3.Bucket),
-        Key:    aws.String(config.FileName),
+        Key:    aws.String(config.fileName),
         Body:   fileData,
         ACL:    "public-read",
     })
@@ -54,7 +54,7 @@ func (store *Store) UploadS3(fileData io.Reader, config UploadS3Config) (string,
     if store.db != nil {
         query := fmt.Sprintf(
             "INSERT INTO uploaded_files(id, user_id, filename, size, uploaded_url) VALUES('%s', '%s', '%s', %d, '%s')",
-            id, config.UserId, config.FileName, int(config.FileSize), uploadedPath,
+            id, config.userId, config.fileName, int(config.fileSize), uploadedPath,
         )
 
         store.db.Exec(query)

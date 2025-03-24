@@ -29,13 +29,6 @@ type Config struct {
     //
     // Optional. Default: 12 * 1024 * 1024
     BodyLimit int `json:"body_limit,omitempty"`
-
-    // DisableHttps disables HTTPS for session.
-    // !!! NOT RECOMMENDED !!!
-    // Set to `false` ONLY when your localhost doesn't support HTTPS connection.
-    //
-    // Optional. Default: false
-    DisableHttps bool `json:"disable_https,omitempty"`
 }
 
 type S3 struct {

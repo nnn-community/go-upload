@@ -2,8 +2,9 @@ package goupload
 
 import (
     "github.com/nnn-community/go-upload/upload"
-    "github.com/nnn-community/go-upload/upload/files"
+    "github.com/nnn-community/go-upload/upload/mime"
     "github.com/nnn-community/go-upload/upload/size"
+    "github.com/nnn-community/go-upload/upload/uploadable"
     "github.com/nnn-community/go-utils/env"
     "github.com/nnn-community/go-utils/strings"
     "os"
@@ -27,9 +28,9 @@ func main() {
         },
     })
 
-    app.AddUpload("article", files.Image("articles", size.Px(1290), size.Px(710)))
-    app.AddUpload("editor", files.Image("user-data", size.Px(1290), size.Auto()))
-    app.AddUpload("scans", files.File("documents", []string{files.TYPE_PDF, files.TYPE_PNG}))
+    app.AddUpload("article", uploadable.Image("articles", size.Px(1290), size.Px(710)))
+    app.AddUpload("editor", uploadable.Image("user-data", size.Px(1290), size.Auto()))
+    app.AddUpload("scans", uploadable.File("documents", []string{mime.TYPE_PDF, mime.TYPE_PNG}))
 
     app.Listen(":" + os.Getenv("PORT"))
 }

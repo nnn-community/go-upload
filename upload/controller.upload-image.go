@@ -48,7 +48,7 @@ func (store *Store) uploadImage(c *fiber.Ctx) error {
         })
     }
 
-    config, exists := (*store.configs)[configValues[0]]
+    config, exists := (*store.uploadables)[configValues[0]]
 
     if !exists || config.GetType() != "image" {
         return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
@@ -110,11 +110,11 @@ func (store *Store) uploadImage(c *fiber.Ctx) error {
         })
     }
 
-    result, s3err := store.UploadS3(resizedData, UploadS3Config{
-        Directory: config.GetDirectory(),
-        FileName:  fileName,
-        FileSize:  fileSize,
-        UserId:    siwx.ID,
+    result, s3err := store.uploadToS3(resizedData, uploadS3Config{
+        directory: config.GetDirectory(),
+        fileName:  fileName,
+        fileSize:  fileSize,
+        userId:    siwx.ID,
     })
 
     if s3err != nil {
