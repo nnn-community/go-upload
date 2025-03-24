@@ -78,8 +78,8 @@ github.com/mattn/go-runewidth v0.0.15 h1:UNAjwbU9l54TA3KzvqLGxwWjHmMgBUVhBiTjelZ
 github.com/mattn/go-runewidth v0.0.15/go.mod h1:Jdepj2loyihRzMpdS35Xk/zdY8IAYHsh153qUoGf23w=
 github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 h1:zYyBkD/k9seD2A7fsi6Oo2LfFZAehjjQMERAvZLEDnQ=
 github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646/go.mod h1:jpp1/29i3P1S/RLdc7JQKbRpFeM1dOBd8T9ki5s+AY8=
-github.com/nnn-community/go-utils v1.0.0 h1:fidV1odxiTp79MsyeakXn9uI3DHLIMamhA2bRz+jMx4=
-github.com/nnn-community/go-utils v1.0.0/go.mod h1:GQP1xj53qTzoOvWGsOyLYqC98eQRRMeBqOrZ8C7H/aI=
+github.com/nnn-community/go-utils v1.0.1 h1:Lu0s/b0LaMtqOfQ0XvhWgdocuNAWMcE7Cp3Ey5PUUfY=
+github.com/nnn-community/go-utils v1.0.1/go.mod h1:gXDluIXRWVTlw/VJ5DAfpDHSP1395Nk1uh4XzLWa/pg=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/redis/go-redis/v9 v9.6.1 h1:HHDteefn6ZkTtY5fGUE8tj8uy85AHk6zP7CpzIAM0y4=
