@@ -1,4 +1,4 @@
-package goupload
+package upload
 
 import (
     "context"
@@ -53,7 +53,7 @@ func (store *Store) UploadS3(fileData io.Reader, config UploadS3Config) (string,
 
     if store.db != nil {
         query := fmt.Sprintf(
-            "INSERT INTO uploaded_files(id, user_id, filename, size, source_url) VALUES('%s', '%s', '%s', %d, '%s')",
+            "INSERT INTO uploaded_files(id, user_id, filename, size, uploaded_url) VALUES('%s', '%s', '%s', %d, '%s')",
             id, config.UserId, config.FileName, int(config.FileSize), uploadedPath,
         )
 

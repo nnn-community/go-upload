@@ -1,4 +1,4 @@
-package upload
+package files
 
 const TYPE_PNG = "image/png"
 const TYPE_GIF = "image/gif"

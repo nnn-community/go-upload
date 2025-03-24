@@ -1,4 +1,4 @@
-package goupload
+package upload
 
 import (
     "database/sql"
@@ -13,7 +13,7 @@ import (
     "github.com/gofiber/fiber/v2/middleware/session"
     "github.com/gofiber/storage/redis/v3"
     _ "github.com/lib/pq"
-    "github.com/nnn-community/go-upload/upload/defs"
+    "github.com/nnn-community/go-upload/upload/files/defs"
     "log"
     "net/url"
     "strings"
@@ -21,18 +21,18 @@ import (
 
 // New creates a new Upload named instance.
 //
-//	app := goupload.New(goupload.Config{
+//	app := upload.New(upload.Config{
 //	    DatabaseUrl: "host= user= password= dbname= port=",
 //      Proxy: "https://cdn.example.com",
 //      BodyLimit: 500,
-//      S3: goupload.S3{
+//      S3: upload.S3{
 //          Endpoint:  "https://s3.amazonaws.com",
 //          Region:    "us-east-1",
 //          Bucket:    "goupload",
 //          AccessKey: "123",
 //          SecretKey: "456",
 //      },
-//      Redis: goupload.Redis{
+//      Redis: upload.Redis{
 //          Url: "localhost:6379",
 //          DB:  0,
 //      },

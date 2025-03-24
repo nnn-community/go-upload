@@ -1,4 +1,4 @@
-package goupload
+package upload
 
 type Config struct {
     // S3 config to your server.
@@ -13,7 +13,7 @@ type Config struct {
     Redis Redis `json:"redis"`
 
     // DatabaseUrl to you database, where the file log will be stored. If you do not need to log files, do not define
-    // this option.
+    // this option. Use `schema.sql` in the root to create a log table.
     // Supports only postgres database for now.
     //
     // Optional.
@@ -30,7 +30,7 @@ type Config struct {
     // Optional. Default: 12 * 1024 * 1024
     BodyLimit int `json:"body_limit,omitempty"`
 
-    // DisableHttps disables HTTPS.
+    // DisableHttps disables HTTPS for session.
     // !!! NOT RECOMMENDED !!!
     // Set to `false` ONLY when your localhost doesn't support HTTPS connection.
     //

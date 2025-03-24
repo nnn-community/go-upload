@@ -1,9 +1,9 @@
-package goupload
+package upload
 
 import (
     "github.com/gofiber/fiber/v2"
-    "github.com/nnn-community/go-upload/codes"
-    "github.com/nnn-community/go-upload/utils"
+    "github.com/nnn-community/go-upload/upload/codes"
+    "github.com/nnn-community/go-upload/upload/utils"
     "github.com/nnn-community/go-utils/strings"
     "math"
 )

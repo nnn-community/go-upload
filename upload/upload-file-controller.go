@@ -1,15 +1,13 @@
-package goupload
+package upload
 
 import (
     "github.com/gofiber/fiber/v2"
-    "github.com/nnn-community/go-upload/codes"
-    "github.com/nnn-community/go-upload/utils"
+    "github.com/nnn-community/go-upload/upload/codes"
+    "github.com/nnn-community/go-upload/upload/utils"
     "mime/multipart"
     "net/http"
     "path/filepath"
-    "strconv"
     "strings"
-    "time"
 )
 
 func (store *Store) uploadFile(c *fiber.Ctx) error {
@@ -62,8 +60,7 @@ func (store *Store) uploadFile(c *fiber.Ctx) error {
 
     ext := filepath.Ext(file.Filename)
     ext = strings.ToLower(ext)
-    encryptedFileName := strconv.Itoa(int(time.Now().Unix())) + utils.GetMD5Hash(file.Filename)
-    fileName := encryptedFileName + ext
+    fileName := utils.GetMD5Hash(file.Filename) + ext
 
     if len(config.GetAccept()) > 0 {
         mime, err := getMimeType(fileData)

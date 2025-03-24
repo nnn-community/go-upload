@@ -1,4 +1,4 @@
-package upload
+package files
 
 type ConfigValues struct {
     Directory string

@@ -3,18 +3,15 @@ package utils
 import (
     "bytes"
     "errors"
+    "github.com/chai2010/webp"
+    "github.com/nfnt/resize"
     "image"
     "image/jpeg"
     "image/png"
     "io"
     "mime/multipart"
     "path/filepath"
-    "strconv"
     "strings"
-    "time"
-
-    "github.com/chai2010/webp"
-    "github.com/nfnt/resize"
 )
 
 type CropImageConfig struct {
@@ -43,8 +40,7 @@ func CropImage(file *multipart.FileHeader, config CropImageConfig) (io.Reader, s
     */
     ext := filepath.Ext(file.Filename)
     ext = strings.ToLower(ext)
-    encryptedFileName := strconv.Itoa(int(time.Now().Unix())) + GetMD5Hash(file.Filename)
-    fileName := encryptedFileName + ext
+    fileName := GetMD5Hash(file.Filename) + ext
 
     /**
       Decode image

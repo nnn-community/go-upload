@@ -1,6 +1,8 @@
-package upload
+package files
 
-import "github.com/nnn-community/go-upload/upload/defs"
+import (
+    "github.com/nnn-community/go-upload/upload/files/defs"
+)
 
 type FileUpload struct {
     Directory string
@@ -8,7 +10,7 @@ type FileUpload struct {
     Accept    []string
 }
 
-func NewFileUpload(directory string, accept []string) defs.UploadConfig {
+func File(directory string, accept []string) defs.UploadConfig {
     return ConfigValues{
         Type:      "file",
         Directory: directory,
