@@ -71,7 +71,7 @@ func (store *Store) AddUpload(name string, cfg uploadable.Uploadable) {
 
 func (store *Store) Listen(addr string) error {
     // Create routes before starting a service
-    store.app.Get("/get-config", store.getConfig)
+    store.app.Get("/config", store.getConfig)
     store.app.Post("/upload/image", siwx.Middleware, store.uploadImage)
     store.app.Post("/upload/file", siwx.Middleware, store.uploadFile)
 
