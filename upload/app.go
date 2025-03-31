@@ -1,13 +1,11 @@
 package upload
 
 import (
-    "fmt"
     "github.com/gofiber/fiber/v2"
-    "github.com/gofiber/fiber/v2/middleware/cors"
-    "github.com/gofiber/storage/redis/v3"
-    _ "github.com/lib/pq"
+    "github.com/nnn-community/go-siwx/siwx"
     "github.com/nnn-community/go-upload/upload/uploadable"
     "log"
+    "os"
 )
 
 type App interface {
@@ -25,26 +23,37 @@ func New(config Config) App {
         log.Fatal("Error connecting to the database:", err)
     }
 
+    if config.S3.Endpoint == "" {
+        config.S3.Endpoint = os.Getenv("S3_ENDPOINT")
+    }
+
+    if config.S3.Region == "" {
+        config.S3.Region = os.Getenv("S3_REGION")
+    }
+
+    if config.S3.Bucket == "" {
+        config.S3.Bucket = os.Getenv("S3_BUCKET")
+    }
+
+    if config.S3.AccessKey == "" {
+        config.S3.AccessKey = os.Getenv("S3_ACCESS_KEY")
+    }
+
+    if config.S3.SecretKey == "" {
+        config.S3.SecretKey = os.Getenv("S3_SECRET_KEY")
+    }
+
     s3 := getS3Client(config.S3)
 
     if config.BodyLimit == 0 {
         config.BodyLimit = 12 * 1024 * 1024
     }
 
-    app := fiber.New(fiber.Config{
-        BodyLimit: config.BodyLimit,
-    })
-
-    app.Use(cors.New(cors.Config{
-        AllowOriginsFunc: func(_ string) bool {
-            return true
+    app := siwx.New(siwx.Config{
+        Fiber: fiber.Config{
+            BodyLimit: config.BodyLimit,
         },
-        AllowMethods:     "GET,HEAD,POST,PUT,DELETE,OPTIONS,PATCH",
-        AllowCredentials: true,
-    }))
-
-    redisStorage := redis.New(redis.Config{
-        URL: fmt.Sprintf("%s/%d", config.Redis.Url, config.Redis.DB),
+        Redis: config.Redis,
     })
 
     return &Store{
@@ -53,7 +62,6 @@ func New(config Config) App {
         db:          db,
         s3:          s3,
         uploadables: &(map[string]uploadable.Uploadable{}),
-        redis:       redisStorage,
     }
 }
 
@@ -64,8 +72,8 @@ func (store *Store) AddUpload(name string, cfg uploadable.Uploadable) {
 func (store *Store) Listen(addr string) error {
     // Create routes before starting a service
     store.app.Get("/get-config", store.getConfig)
-    store.app.Post("/upload/image", store.siwxMiddleware, store.uploadImage)
-    store.app.Post("/upload/file", store.siwxMiddleware, store.uploadFile)
+    store.app.Post("/upload/image", siwx.Middleware, store.uploadImage)
+    store.app.Post("/upload/file", siwx.Middleware, store.uploadFile)
 
     return store.app.Listen(addr)
 }

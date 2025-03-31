@@ -1,5 +1,7 @@
 package upload
 
+import "github.com/nnn-community/go-siwx/siwx"
+
 type Config struct {
     // S3 config to your server.
     //
@@ -10,7 +12,7 @@ type Config struct {
     // Expects you have configured SIWX (`https://docs.nnn-community.com/react/siwx/install`).
     //
     // Required.
-    Redis Redis `json:"redis"`
+    Redis siwx.Redis `json:"redis"`
 
     // DatabaseUrl to you database, where the file log will be stored. If you do not need to log files, do not define
     // this option. Use `schema.sql` in the root to create a log table.
@@ -32,38 +34,18 @@ type Config struct {
 }
 
 type S3 struct {
-    // Required.
+    // Optional, default: os.Getenv("S3_ENDPOINT")
     Endpoint string `json:"endpoint"`
 
-    // Required.
+    // Optional, default: os.Getenv("S3_REGION")
     Region string `json:"region"`
 
-    // Required.
+    // Optional, default: os.Getenv("S3_BUCKET")
     Bucket string `json:"bucket"`
 
-    // Required.
+    // Optional, default: os.Getenv("S3_ACCESS_KEY")
     AccessKey string `json:"access_key"`
 
-    // Required.
+    // Optional, default: os.Getenv("S3_SECRET_KEY")
     SecretKey string `json:"secret_key"`
-}
-
-type Redis struct {
-    // Provide Url string to the Redis Server, omit DB from the string as it will be added from the DB option.
-    //
-    // Required.
-    Url string `json:"url"`
-
-    // DB number with session storage.
-    //
-    // Required.
-    DB int `json:"db"`
-}
-
-// SiwxUser is available to get when the route is authenticated via `siwx := c.Locals("siwx").(SiwxUser)`
-type SiwxUser struct {
-    ID          string                 `json:"id"`
-    Address     string                 `json:"address"`
-    Permissions []string               `json:"permissions"`
-    UserData    map[string]interface{} `json:"userData"`
 }

@@ -2,6 +2,7 @@ package upload
 
 import (
     "github.com/gofiber/fiber/v2"
+    "github.com/nnn-community/go-siwx/siwx"
     "github.com/nnn-community/go-upload/upload/codes"
     "github.com/nnn-community/go-upload/upload/utils"
     "github.com/nnn-community/go-utils/strings"
@@ -10,7 +11,7 @@ import (
 
 func (store *Store) uploadImage(c *fiber.Ctx) error {
     form, err := c.MultipartForm()
-    siwx := c.Locals("siwx").(SiwxUser)
+    user := c.Locals("siwx").(siwx.User)
 
     /**
       Validate form request and required fields
@@ -114,7 +115,7 @@ func (store *Store) uploadImage(c *fiber.Ctx) error {
         directory: config.GetDirectory(),
         fileName:  fileName,
         fileSize:  fileSize,
-        userId:    siwx.ID,
+        userId:    user.ID,
     })
 
     if s3err != nil {

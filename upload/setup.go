@@ -6,7 +6,7 @@ import (
     "github.com/aws/aws-sdk-go-v2/credentials"
     "github.com/aws/aws-sdk-go-v2/service/s3"
     "github.com/gofiber/fiber/v2"
-    "github.com/gofiber/storage/redis/v3"
+    _ "github.com/lib/pq"
     "github.com/nnn-community/go-upload/upload/uploadable"
 )
 
@@ -16,7 +16,6 @@ type Store struct {
     db          *sql.DB
     s3          *s3.Client
     uploadables *map[string]uploadable.Uploadable
-    redis       *redis.Storage
 }
 
 func getDbClient(connStr string) (*sql.DB, error) {

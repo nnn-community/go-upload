@@ -1,12 +1,12 @@
 package goupload
 
 import (
+    "github.com/nnn-community/go-siwx/siwx"
     "github.com/nnn-community/go-upload/upload"
     "github.com/nnn-community/go-upload/upload/mime"
     "github.com/nnn-community/go-upload/upload/size"
     "github.com/nnn-community/go-upload/upload/uploadable"
     "github.com/nnn-community/go-utils/env"
-    "github.com/nnn-community/go-utils/strings"
     "os"
 )
 
@@ -22,9 +22,9 @@ func main() {
             AccessKey: os.Getenv("S3_ACCESS_KEY"),
             SecretKey: os.Getenv("S3_SECRET_KEY"),
         },
-        Redis: upload.Redis{
+        Redis: siwx.Redis{
             Url: os.Getenv("REDIS_URL"),
-            DB:  strings.ToInt(os.Getenv("REDIS_DB"), 0),
+            DB:  os.Getenv("REDIS_DB"),
         },
     })
 
