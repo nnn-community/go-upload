@@ -14,7 +14,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/lib/pq v1.10.9
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
-	github.com/nnn-community/go-siwx v1.0.1
+	github.com/nnn-community/go-siwx v1.0.3
 	github.com/nnn-community/go-utils v1.0.2
 )
 
@@ -41,6 +41,6 @@ require (
 	github.com/redis/go-redis/v9 v9.7.3 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.59.0 // indirect
-	golang.org/x/sys v0.31.0 // indirect
+	github.com/valyala/fasthttp v1.60.0 // indirect
+	golang.org/x/sys v0.32.0 // indirect
 )
